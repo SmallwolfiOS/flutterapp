@@ -8,7 +8,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // final wordPair = new WordPair.random();
     return MaterialApp(
-      title: 'Welcome to Flutter',
       home: new Scaffold(
         appBar: new AppBar(
           title: new Text('这里是导航的title'),
@@ -35,9 +34,6 @@ class RandomWordsState extends State<RandomWords>{
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Startup Name Generator'),
-      ),
       body: _buildSuggestions(),
     );
   }
