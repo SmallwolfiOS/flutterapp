@@ -5,20 +5,54 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+
+ Choice _selectedChoice = choices[0]; // The app's "state".
+  void _select(Choice choice) {
+    // setState(() { // Causes the app to rebuild with the new _selectedChoice.
+    //   _selectedChoice = choice;
+    // });
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    // final wordPair = new WordPair.random();
-    return MaterialApp(
-      home: new Scaffold(
-        body: new Center(
-          // child: new Text('这里是文字 Hello Wolrd'),
-          // child: new Text(wordPair.asPascalCase),
-          child: new RandomWords(),
-        ),
-      ),
+    return new MaterialApp(
+      home:new AppBar(
+        title: const Text('This is title'),
+        backgroundColor: Colors.green,
+        actions: <Widget>[
+          new IconButton(icon: new Icon(Icons.timer), onPressed: null,),
+          new PopupMenuButton(
+            onSelected: _select,
+            itemBuilder: (BuildContext context){
+              return choices.skip(2).map((Choice choice) {
+                  return new PopupMenuItem<Choice>(
+                    value: choice,
+                    child: new Text(choice.title),
+                  );
+                }).toList();
+            },
+          )
+        ],
+      )
     );
   }
 }
+class Choice {
+  const Choice({ this.title, this.icon });
+  final String title;
+  final IconData icon;
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: 'Car', icon: Icons.directions_car),
+  const Choice(title: 'Bicycle', icon: Icons.directions_bike),
+  const Choice(title: 'Boat', icon: Icons.directions_boat),
+  const Choice(title: 'Bus', icon: Icons.directions_bus),
+  const Choice(title: 'Train', icon: Icons.directions_railway),
+  const Choice(title: 'Walk', icon: Icons.directions_walk),
+];
 
 class RandomWords extends StatefulWidget {
   @override
@@ -39,7 +73,8 @@ class RandomWordsState extends State<RandomWords> {
       appBar: new AppBar(
         title: new Text('Startup Name Generator'),
         actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
+          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved),
+          new IconButton(icon: new Icon(Icons.timer), onPressed: _pushSaved)
         ],
       ),
       body: _buildSuggestions(),
