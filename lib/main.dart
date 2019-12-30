@@ -6,141 +6,175 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-
- Choice _selectedChoice = choices[0]; // The app's "state".
-  void _select(Choice choice) {
-    // setState(() { // Causes the app to rebuild with the new _selectedChoice.
-    //   _selectedChoice = choice;
-    // });
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      home:new AppBar(
-        title: const Text('This is title'),
-        backgroundColor: Colors.green,
-        actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.timer), onPressed: null,),
-          new PopupMenuButton(
-            onSelected: _select,
-            itemBuilder: (BuildContext context){
-              return choices.skip(2).map((Choice choice) {
-                  return new PopupMenuItem<Choice>(
-                    value: choice,
-                    child: new Text(choice.title),
-                  );
-                }).toList();
-            },
-          )
-        ],
-      )
+      home: _mainApp(),
     );
   }
-}
-class Choice {
-  const Choice({ this.title, this.icon });
-  final String title;
-  final IconData icon;
-}
 
-const List<Choice> choices = const <Choice>[
-  const Choice(title: 'Car', icon: Icons.directions_car),
-  const Choice(title: 'Bicycle', icon: Icons.directions_bike),
-  const Choice(title: 'Boat', icon: Icons.directions_boat),
-  const Choice(title: 'Bus', icon: Icons.directions_bus),
-  const Choice(title: 'Train', icon: Icons.directions_railway),
-  const Choice(title: 'Walk', icon: Icons.directions_walk),
-];
-
-class RandomWords extends StatefulWidget {
-  @override
-  createState() => new RandomWordsState();
-}
-
-class RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-
-  final _saved = new Set<WordPair>();
-
-  final TextStyle _biggerFont =
-      new TextStyle(fontSize: 18.0, color: Colors.blue);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _mainApp() {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Startup Name Generator'),
+        title: new Text(
+          '卦象盾',
+          style: new TextStyle(color: Colors.black, fontSize: 20.0),
+          textAlign: TextAlign.right,
+        ),
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        elevation: 0.5,
         actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved),
-          new IconButton(icon: new Icon(Icons.timer), onPressed: _pushSaved)
+          new IconButton(icon: new Icon(Icons.list), onPressed: null),
+          new IconButton(icon: new Icon(Icons.timer), onPressed: null)
         ],
       ),
-      body: _buildSuggestions(),
+      body: _mainView(),
     );
   }
+}
 
-  Widget _buildSuggestions() {
-    return new ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemBuilder: (context, i) {
-        if (i.isOdd) {
-          return new Divider();
-        }
+Widget _mainView() {
+  return new Container(
+    color: Colors.white,
+    width: double.infinity,
+    height: double.infinity,
+    child: new Column(
+      children: <Widget>[
+        // new Image.asset('Images/point_bg.png',),
 
-        final index = i ~/ 2;
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-        print(index);
-        return _buildRow(_suggestions[index]);
-      },
-    );
-  }
-
-  Widget _buildRow(WordPair pair) {
-    final alreadySaved = _saved.contains(pair);
-    return new ListTile(
-      title: new Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
-      trailing: new Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null,
-      ),
-      onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _saved.remove(pair);
-          } else {
-            _saved.add(pair);
-          }
-        });
-      },
-    );
-  }
-
-  void _pushSaved() {
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      final tiles = _saved.map((pair) {
-        return new ListTile(
-            title: new Text(
-          pair.asPascalCase,
-          style: _biggerFont,
-        ));
-      });
-      final divided = ListTile.divideTiles(
-        context: context,
-        tiles: tiles,
-      ).toList();
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Saved Suggestions'),
+        new Stack(
+          children: <Widget>[
+            
+            new Image.asset('Images/point_bg.png'),
+            new Container(
+              alignment: Alignment.center,
+              child: new Text(
+                '2019.12.30',
+                style: new TextStyle(color: Colors.blue, fontSize: 18.0,),
+                textAlign: TextAlign.center,
+              ),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            ),
+            new Container(
+              child:
+                new Stack(
+                  children: <Widget>[
+                    new Image.asset('Images/point_main.png'),
+                    new Container(
+                      child: new Image.asset('Images/01.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(75, 10, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/02.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(165, 30, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/03.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(255, 10, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/04.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(25, 65, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/05.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(35, 155, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/06.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(25, 245, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/07.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(75, 305, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/08.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(165, 285, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/09.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(255, 305, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/10.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(305, 65, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/11.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(305, 250, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/12.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(285, 155, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/13.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(120, 100, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/14.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(200, 100, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                    new Container(
+                      child: new Image.asset('Images/15.png',color: Colors.black,),
+                      margin: const EdgeInsets.fromLTRB(170, 170, 0, 0),
+                      width: 21,
+                      height: 43,
+                    ),
+                  ],
+                ),
+              margin: const EdgeInsets.fromLTRB(30, 50, 30, 30),
+            )
+          ],
         ),
-        body: new ListView(children: divided),
-      );
-    }));
-  }
+        new Container(
+          child: new OutlineButton(
+            onPressed: () {
+              print('1');
+            },
+            child: Text(
+              '盾盘',
+              style: new TextStyle(color: Colors.blue, fontSize: 17.0),
+            ),
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            borderSide: new BorderSide(color: Colors.blue),
+          ),
+          margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+        ),
+      ],
+    ),
+  );
 }
