@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutterapp/secondPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      home: _mainApp(),
+      home: _mainApp(context),
     );
   }
 
-  Widget _mainApp() {
+  Widget _mainApp(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
@@ -26,7 +27,9 @@ class MyApp extends StatelessWidget {
         elevation: 0.5,
         actions: <Widget>[
           new IconButton(icon: new Icon(Icons.list), onPressed: null),
-          new IconButton(icon: new Icon(Icons.timer), onPressed: null)
+          new IconButton(icon: new Icon(Icons.timer), onPressed: ()=> {
+          Navigator.of(context).pushReplacementNamed('/secondPage')
+          })
         ],
       ),
       body: _mainView(),
