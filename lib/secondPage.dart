@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
-class secondPagePage extends StatefulWidget {
-  secondPagePage({Key key, this.title}) : super(key: key);
+class secondPage extends StatefulWidget {
   final String title;
-
+  secondPage(this.title);
+  // secondPage({Key key, this.title}) : super(key: key);
   @override
-  _secondPagePageState createState() => _secondPagePageState();
+  _secondPageState createState() => _secondPageState();
 }
 
-class _secondPagePageState extends State<secondPagePage> {
+class _secondPageState extends State<secondPage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          backgroundColor: Colors.red,
         ),
         body: Center(
           child: Column(),

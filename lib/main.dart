@@ -1,5 +1,5 @@
+
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import 'package:flutterapp/secondPage.dart';
 
 void main() => runApp(MyApp());
@@ -10,10 +10,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      home: _mainApp(context),
+      home: FirstPage(),
+
     );
   }
+}
 
+
+
+class FirstPage extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+
+    return _mainApp(context);
+  }
   Widget _mainApp(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
@@ -27,40 +37,38 @@ class MyApp extends StatelessWidget {
         elevation: 0.5,
         actions: <Widget>[
           new IconButton(icon: new Icon(Icons.list), onPressed: null),
-          new IconButton(icon: new Icon(Icons.timer), onPressed: ()=> {
-          Navigator.of(context).pushReplacementNamed('/secondPage')
+          new IconButton(icon: new Icon(Icons.timer), color: Colors.red, onPressed: () => {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => secondPage("1111"))),
           })
         ],
       ),
       body: _mainView(),
     );
   }
-}
+  Widget _mainView() {
+    return new Container(
+      color: Colors.white,
+      width: double.infinity,
+      height: double.infinity,
+      child: new Column(
+        children: <Widget>[
+          // new Image.asset('Images/point_bg.png',),
 
-Widget _mainView() {
-  return new Container(
-    color: Colors.white,
-    width: double.infinity,
-    height: double.infinity,
-    child: new Column(
-      children: <Widget>[
-        // new Image.asset('Images/point_bg.png',),
+          new Stack(
+            children: <Widget>[
 
-        new Stack(
-          children: <Widget>[
-            
-            new Image.asset('Images/point_bg.png'),
-            new Container(
-              alignment: Alignment.center,
-              child: new Text(
-                '2019.12.30',
-                style: new TextStyle(color: Colors.blue, fontSize: 18.0,),
-                textAlign: TextAlign.center,
+              new Image.asset('Images/point_bg.png'),
+              new Container(
+                alignment: Alignment.center,
+                child: new Text(
+                  '2019.12.30',
+                  style: new TextStyle(color: Colors.blue, fontSize: 18.0,),
+                  textAlign: TextAlign.center,
+                ),
+                margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               ),
-              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-            ),
-            new Container(
-              child:
+              new Container(
+                child:
                 new Stack(
                   children: <Widget>[
                     new Image.asset('Images/point_main.png'),
@@ -156,28 +164,31 @@ Widget _mainView() {
                     ),
                   ],
                 ),
-              margin: const EdgeInsets.fromLTRB(30, 50, 30, 30),
-            )
-          ],
-        ),
-        new Container(
-          child: new OutlineButton(
-            onPressed: () {
-              print('1');
-            },
-            child: Text(
-              '盾盘',
-              style: new TextStyle(color: Colors.blue, fontSize: 17.0),
-            ),
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
-            borderSide: new BorderSide(color: Colors.blue),
+                margin: const EdgeInsets.fromLTRB(30, 50, 30, 30),
+              )
+            ],
           ),
-          margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-        ),
-      ],
-    ),
-  );
+          new Container(
+            child: new OutlineButton(
+              onPressed: () {
+                print('1');
+              },
+              child: Text(
+                '盾盘',
+                style: new TextStyle(color: Colors.blue, fontSize: 17.0),
+              ),
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              borderSide: new BorderSide(color: Colors.blue),
+            ),
+            margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+          ),
+        ],
+      ),
+    );
+  }
 }
+
+
