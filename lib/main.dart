@@ -27,6 +27,7 @@ class FirstPage extends StatelessWidget{
   Widget _mainApp(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        centerTitle: true,
         title: new Text(
           '卦象盾',
           style: new TextStyle(color: Colors.black, fontSize: 20.0),
@@ -39,7 +40,9 @@ class FirstPage extends StatelessWidget{
           new IconButton(icon: new Icon(Icons.list), onPressed: null),
           new IconButton(icon: new Icon(Icons.timer), color: Colors.red, onPressed: () => {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => secondPage("1111"))),
-          })
+          }),
+
+
         ],
       ),
       body: _mainView(),

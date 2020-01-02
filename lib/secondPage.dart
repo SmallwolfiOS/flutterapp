@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/thirdPage.dart';
 
 class secondPage extends StatefulWidget {
   final String title;
@@ -18,7 +19,9 @@ class _secondPageState extends State<secondPage> {
           backgroundColor: Colors.red,
         ),
         body: Center(
-          child: Column(),
+          child: new IconButton(icon: new Icon(Icons.access_alarm), onPressed: ()=>{
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> thirdPage("222222"))),
+          }),
         ) // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
