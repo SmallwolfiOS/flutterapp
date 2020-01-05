@@ -20,7 +20,7 @@ class _secondPageState extends State<secondPage> {
         ),
         body: Center(
           child: new IconButton(icon: new Icon(Icons.access_alarm), onPressed: ()=>{
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> thirdPage("222222"))),
+              Navigator.of(context).push(MaterialPageRoute(fullscreenDialog: true,builder: (context)=> thirdPage("222222"))),
           }),
         ) // This trailing comma makes auto-formatting nicer for build methods.
     );
