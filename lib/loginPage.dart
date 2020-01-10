@@ -16,15 +16,25 @@ class _loginPageState extends State<loginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(null != widget.title ? widget.title : '默认标题'),
-          backgroundColor: Colors.red,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(null != widget.title ? widget.title : '默认标题',textAlign: TextAlign.right,),
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: new Column(
+          children: <Widget>[
+            new Container (
+                alignment: Alignment.center,
+                child: new Text(
+                  'hhha', style: new TextStyle(color: Colors.green,fontSize: 20),)
+            ),
+            new Container (
+                child: new TextField(),
+            )
+          ],
         ),
-        body: Center(
-          child: new Scaffold(
-            body: new Text('asd',style: new TextStyle(color: Colors.red,fontSize: 13 ,backgroundColor: Colors.blue ),),
-          ),
-        ) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+      ),
+    ); // This trailing comma makes auto-formatting nicer for build methods.
   }
 }
